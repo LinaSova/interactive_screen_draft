@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Цвета · необычные названия</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      background: #1e1e2f;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 12px;
+      touch-action: manipulation;
+    }
+    #app {
+      max-width: 780px;
+      width: 100%;
+      background: #fcf9f2;
+      border-radius: 56px 56px 48px 48px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      padding: 28px 22px 32px;
+      position: relative;
+      transition: opacity 0.2s;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+    }
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+    .screen {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 18px;
+    }
+    .hidden {
+      display: none !important;
+    }
+    .attract {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 360px;
+      cursor: pointer;
+      background: radial-gradient(circle at 30% 40%, #ffe8d0, #f5d6c0);
+      border-radius: 40px;
+      padding: 30px 20px;
+      transition: 0.2s;
+    }
+    .attract h1 {
+      font-size: 3.4rem;
+      color: #2c1b0f;
+      margin-bottom: 8px;
+    }
+    .attract .sub {
+      font-size: 1.6rem;
+      color: #3d2a1a;
+      background: rgba(255,255,240,0.7);
+      padding: 12px 28px;
+      border-radius: 60px;
+      display: inline-block;
+    }
+    .mode-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 8px 0 4px;
+    }
+    .mode-card {
+      background: white;
+      border-radius: 40px;
+      padding: 18px 22px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border: 2px solid #e6dfd3;
+      transition: 0.1s;
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+    .mode-card:active {
+      background: #efece4;
+      transform: scale(0.98);
+    }
+    .mode-card .icon {
+      font-size: 2.6rem;
+      min-width: 56px;
+      text-align: center;
+    }
+    .mode-card .info {
+      flex: 1;
+    }
+    .mode-card .info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+    .mode-card .info p {
+      color: #4d3e2e;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ede7dc;
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: #2d241a;
+    }
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+    .dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 14px;
+      background: #cbc2b2;
+    }
+    .dot.active {
+      background: #3f7e5c;
+    }
+    .dot.done {
+      background: #7fa88a;
+    }
+    .question-area {
+      background: #f5f0e8;
+      border-radius: 40px;
+      padding: 24px 18px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+    .stimulus {
+      font-size: 3rem;
+      font-weight: 600;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      width: 100%;
+      border-radius: 60px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+      padding: 6px;
+      text-align: center;
+      word-break: break-word;
+    }
+    .stimulus.color-block {
+      min-height: 130px;
+      border-radius: 40px;
+      background: #b0a0a0;
+      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+    }
+    .option-btn {
+      background: white;
+      border: 3px solid #d6cdbc;
+      border-radius: 40px;
+      padding: 18px 8px;
+      font-size: 1.4rem;
+      font-weight: 500;
+      text-align: center;
+      transition: 0.08s;
+      touch-action: manipulation;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      word-break: break-word;
+    }
+    .option-btn.color-option {
+      min-height: 90px;
+    }
+    .option-btn:active {
+      transform: scale(0.96);
+    }
+    .option-btn.correct {
+      border-color: #2b7a4b;
+      background: #d9f0e0;
+    }
+    .option-btn.wrong {
+      border-color: #b13e3e;
+      background: #f5d6d6;
+    }
+    .option-btn.disabled {
+      pointer-events: none;
+      opacity: 0.8;
+    }
+    .feedback {
+      font-size: 1.4rem;
+      padding: 8px 14px;
+      border-radius: 60px;
+      background: #e3ddd0;
+      width: 100%;
+      text-align: center;
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .result-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f5f0e8;
+      border-radius: 40px;
+      padding: 24px 18px;
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .result-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: white;
+      padding: 12px 18px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+    }
+    .result-row .color-sample {
+      width: 44px;
+      height: 44px;
+      border-radius: 30px;
+      border: 1px solid #ccc;
+      flex-shrink: 0;
+    }
+    .result-row .result-name {
+      flex: 1;
+      font-weight: 500;
+    }
+    .btn-primary {
+      background: #2d4a3b;
+      border: none;
+      color: white;
+      font-size: 1.7rem;
+      font-weight: 600;
+      padding: 20px 12px;
+      border-radius: 60px;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.1s;
+      touch-action: manipulation;
+      box-shadow: 0 4px 0 #1d3227;
+    }
+    .btn-primary:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 #1d3227;
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      transform: translateY(0);
+      box-shadow: 0 4px 0 #1d3227;
+      pointer-events: none;
+    }
+    .stat-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 340px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .stat-row {
+      background: white;
+      border-radius: 40px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.1rem;
+      border: 1px solid #e0d7c8;
+    }
+    .stat-row .color-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 30px;
+      border: 1px solid #bbb;
+      flex-shrink: 0;
+    }
+    .stat-row .stat-numbers {
+      margin-left: auto;
+      font-weight: 500;
+      color: #1f2e23;
+      white-space: nowrap;
+    }
+    .drag-area {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin: 8px 0;
+    }
+    .drag-fish {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+      border: 3px solid #3d3a33;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.1s;
+      touch-action: none;
+      cursor: grab;
+      background: #b0a0a0;
+      flex-shrink: 0;
+    }
+    .drop-zone {
+      min-width: 100px;
+      min-height: 70px;
+      background: #e8e1d4;
+      border-radius: 40px;
+      border: 3px dashed #9b8e7c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      transition: 0.1s;
+      flex: 1 0 auto;
+      color: #3b3226;
+      text-align: center;
+      word-break: break-word;
+    }
+    .drop-zone.filled {
+      border-style: solid;
+      background: #f4efe8;
+    }
+    .drop-zone .mini-color {
+      width: 36px;
+      height: 36px;
+      border-radius: 30px;
+      margin-right: 6px;
+      flex-shrink: 0;
+    }
+    .flex-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .mt-2 { margin-top: 8px; }
+    .mb-1 { margin-bottom: 6px; }
+    .text-center { text-align: center; }
+    .tag {
+      background: #d4cdbc;
+      border-radius: 30px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+    }
+    .empty-state {
+      color: #5e5140;
+      font-style: italic;
+      padding: 20px;
+      text-align: center;
+    }
+    .drag-fish-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    @media (max-width: 480px) {
+      .mode-card { padding: 14px; }
+      .option-btn { font-size: 1.2rem; min-height: 70px; }
+      .stimulus { font-size: 2.2rem; }
+      .drop-zone { min-width: 80px; font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  (function() {
+    // ----- БАЗА ЦВЕТОВ ИЗ CSV (51 цвет) -----
+    const COLOR_DATA = [
+      { name: "ПУРПУРНАЯ ПИЦЦА", hex: "#ff00cc" },
+      { name: "КОБАЛЬТОВЫЙ", hex: "#0047ab" },
+      { name: "ПУРПУРНЫЙ", hex: "#800080" },
+      { name: "МАНГО-ТАНГО", hex: "#ff8243" },
+      { name: "БАБУШКИНЫ ЯБЛОКИ", hex: "#a8e4a0" },
+      { name: "КАРДИНАЛ", hex: "#c41e3a" },
+      { name: "ПУГОВИЦА ХОЛОСТЯКА", hex: "#4abbd5" },
+      { name: "ЭЛЕКТРИК", hex: "#7df9ff" },
+      { name: "ВОДЫ ПЛЯЖА БОНДИ", hex: "#0095b6" },
+      { name: "ВИНОГРАДНЫЙ ТУМАН", hex: "#8398ca" },
+      { name: "ВОДНАЯ СИНЬ", hex: "#256d7b" },
+      { name: "НИАГАРА", hex: "#9db1cc" },
+      { name: "АКУЛЬЯ КОЖА", hex: "#838487" },
+      { name: "СКАНДАЛ", hex: "#cffaf4" },
+      { name: "ИСКРИСТЫЙ ВИНОГРАД", hex: "#773376" },
+      { name: "ЦВЕТ БЛОШИНОГО БРЮШКА", hex: "#4e1609" },
+      { name: "БОБРОВЫЙ", hex: "#9f8170" },
+      { name: "МЁРТВЫЙ ЛОСОСЬ", hex: "#c4a998" },
+      { name: "ПОСЛЕДНИЙ ВЗДОХ ЖАКО", hex: "#ff9218" },
+      { name: "ТЁМНО-ОЛИВКОВЫЙ", hex: "#556832" },
+      { name: "СЮРПРИЗ ДОФИНА", hex: "#f7f21a" },
+      { name: "ЦВЕТ ПЕРГИДРОЛЬНОЙ БЛОНДИНКИ ВЕРДЕПЕШЕВЫЙ", hex: "#eee6a3" },
+      { name: "ПЕРСИКОВЫЙ ПУХ", hex: "#febe98" },
+      { name: "АЛЫЙ", hex: "#ff2400" },
+      { name: "ВЛЮБЛЁННАЯ ЖАБА", hex: "#3caa3c" },
+      { name: "синий", hex: "#0000ff" },
+      { name: "ЕГИПЕТСКИЙ СИНИЙ", hex: "#1034a6" },
+      { name: "ЯЙЦА ДРОЗДА", hex: "#00cccc" },
+      { name: "ПАВЛИНИЙ СИНИЙ", hex: "#004958" },
+      { name: "СИНИЙ ГОБЛИН", hex: "#5f7278" },
+      { name: "ГРИДЕПЕРЛЕВЫЙ", hex: "#c7d0cc" },
+      { name: "ГЕЛИОТРОП", hex: "#df73ff" },
+      { name: "ЗВЁЗДЫ В ШОКЕ", hex: "#ff47ca" },
+      { name: "СЕРОБУРО-МАЛИНОВЫЙ", hex: "#735184" },
+      { name: "ЛЯГУШКА В ОБМОРОКЕ", hex: "#7b917b" },
+      { name: "БИСМАРК-ФУРИОСО ВЕРДЕПОМОВЫЙ", hex: "#a5260a" },
+      { name: "ГОРЧИЧНЫЙ", hex: "#ffdb58" },
+      { name: "ТИЦИАНОВЫЙ", hex: "#d53e07" },
+      { name: "ФУЗИ-ВУЗИ", hex: "#cc6666" },
+      { name: "МАГИЧЕСКАЯ МЯТА", hex: "#aaf0d1" },
+      { name: "УСЛОВИЯ", hex: "#7fff00" },
+      { name: "ДЕТИ ЭДУАРДА", hex: "#f49e83" },
+      { name: "ЦВЕТ МЕДВЕЖЬЕГО УШКА", hex: "#854d18" },
+      { name: "ДЕТСКИЕ ПЯТКИ", hex: "#f5c9da" },
+      { name: "ЛАЗЕРНЫЙ ЛИМОН", hex: "#fefe22" },
+      { name: "ЦВЕТ БЕДРА ИСПУГАННОЙ НИМФЫ", hex: "#faeedd" },
+      { name: "ЦВЕТ СУЕТЫ", hex: "#e3256b" },
+      { name: "РОЗОВЫЙ", hex: "#ffc0cb" },
+      { name: "ОРАНЖЕВЫЙ", hex: "#ffa500" },
+      { name: "ЗЕЛЁНЫЙ", hex: "#008000" },
+      { name: "ФИОЛЕТОВЫЙ", hex: "#8b00ff" }
+    ];
+
+    // ----- СОСТОЯНИЕ -----
+    let state = {
+      screen: 'attract',
+      mode: null,
+      questions: [],
+      currentIndex: 0,
+      answers: [],
+      stats: {},
+      dragPairs: null,
+      dragAssign: {},
+      dragFinished: false,
+      gameLocked: false,
+      timeoutTimer: null,
+      sessionTimer: null,
+    };
+
+    const app = document.getElementById('app');
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function pickRandom(arr, n) {
+      const copy = [...arr];
+      shuffle(copy);
+      return copy.slice(0, n);
+    }
+
+    function getColorByName(name) {
+      return COLOR_DATA.find(c => c.name === name);
+    }
+
+    function getRandomColors(exclude, count) {
+      let pool = COLOR_DATA.filter(c => !exclude.includes(c.name));
+      if (pool.length < count) pool = COLOR_DATA.slice();
+      return pickRandom(pool, count);
+    }
+
+    function updateStats(colorName, correct) {
+      if (!state.stats[colorName]) state.stats[colorName] = { correct: 0, wrong: 0 };
+      if (correct) state.stats[colorName].correct++;
+      else state.stats[colorName].wrong++;
+    }
+
+    function generateQuestions(mode, count = 5) {
+      const qs = [];
+      let usedStimuli = [];
+      let colorPool = shuffle([...COLOR_DATA]);
+      for (let i = 0; i < count; i++) {
+        let color;
+        if (i < colorPool.length) color = colorPool[i];
+        else color = COLOR_DATA[i % COLOR_DATA.length];
+        if (usedStimuli.length > 0 && usedStimuli[usedStimuli.length-1] === color.name) {
+          const other = COLOR_DATA.find(c => c.name !== color.name && !usedStimuli.includes(c.name));
+          if (other) color = other;
+        }
+        usedStimuli.push(color.name);
+        let distractors = getRandomColors([color.name], 3);
+        let options = [color, ...distractors];
+        shuffle(options);
+        qs.push({
+          color: color,
+          mode: mode,
+          options: options,
+          correctAnswer: color.name,
+        });
+      }
+      return qs;
+    }
+
+    function render() {
+      const s = state.screen;
+      if (s === 'attract') renderAttract();
+      else if (s === 'modeSelect') renderModeSelect();
+      else if (s === 'game') renderGame();
+      else if (s === 'resultCycle') renderResultCycle();
+      else if (s === 'stats') renderStats();
+    }
+
+    // ---- ATTRACT ----
+    function renderAttract() {
+      app.innerHTML = `
+        <div class="screen attract" id="attractScreen">
+          <h1>🎨 Цвета</h1>
+          <div class="sub">Коснитесь экрана, чтобы начать</div>
+          <div style="margin-top: 30px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;">
+            ${COLOR_DATA.slice(0, 20).map(c => `<span style="display:inline-block;width:40px;height:40px;border-radius:30px;background:${c.hex};border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.2);"></span>`).join('')}
+          </div>
+        </div>
+      `;
+      document.getElementById('attractScreen').addEventListener('click', () => {
+        clearTimeout(state.sessionTimer);
+        state.screen = 'modeSelect';
+        render();
+      });
+    }
+
+    // ---- MODE SELECT ----
+    function renderModeSelect() {
+      app.innerHTML = `
+        <div class="screen">
+          <h2 style="font-size:2.2rem;">Проверь себя</h2>
+          <div class="mode-grid">
+            <div class="mode-card" data-mode="A">
+              <div class="icon">🔤</div>
+              <div class="info"><h3>Угадай цвет</h3><p>название → цвет · 5 вопросов</p></div>
+            </div>
+            <div class="mode-card" data-mode="B">
+              <div class="icon">🎨</div>
+              <div class="info"><h3>Угадай название</h3><p>цвет → название · 5 вопросов</p></div>
+            </div>
+            <div class="mode-card" data-mode="C">
+              <div class="icon">🔗</div>
+              <div class="info"><h3>Соотнеси</h3><p>4 пары · перетаскивание</p></div>
+            </div>
+          </div>
+          <div style="margin-top: 6px; color:#4d3e2e; text-align:center;font-size:1rem;">нажмите карточку чтобы начать</div>
+        </div>
+      `;
+      document.querySelectorAll('.mode-card').forEach(el => {
+        el.addEventListener('click', (e) => {
+          const mode = el.dataset.mode;
+          startGame(mode);
+        });
+      });
+    }
+
+    // ---- START GAME ----
+    function startGame(mode) {
+      clearTimeout(state.sessionTimer);
+      state.mode = mode;
+      state.currentIndex = 0;
+      state.answers = [];
+      state.gameLocked = false;
+      if (mode === 'C') {
+        const colors = shuffle([...COLOR_DATA]).slice(0, 4);
+        state.dragPairs = colors.map(c => ({ color: c, targetName: c.name, dropZoneId: c.name }));
+        state.dragAssign = {};
+        state.dragFinished = false;
+        state.questions = [];
+        state.screen = 'game';
+        render();
+      } else {
+        const qs = generateQuestions(mode, 5);
+        state.questions = qs;
+        state.screen = 'game';
+        render();
+      }
+    }
+
+    // ---- GAME (A/B) ----
+    function renderGame() {
+      if (state.mode === 'C') {
+        renderGameC();
+        return;
+      }
+      const qs = state.questions;
+      const idx = state.currentIndex;
+      if (idx >= qs.length) {
+        finishCycle();
+        return;
+      }
+      const q = qs[idx];
+      const total = qs.length;
+      const isA = state.mode === 'A';
+      const stimulus = isA ? q.color.name : q.color.hex;
+      const stimulusLabel = isA ? `«${q.color.name}»` : '';
+
+      let optionsHtml = q.options.map((opt, i) => {
+        const label = isA ? `<span style="display:inline-block;width:48px;height:48px;border-radius:30px;background:${opt.hex};border:2px solid #999;"></span>` : opt.name;
+        const classes = 'option-btn ' + (isA ? 'color-option' : '');
+        return `<div class="${classes}" data-index="${i}" style="${isA ? '' : 'background:'+opt.hex+';color:#fff;text-shadow:0 1px 4px rgba(0,0,0,0.4);'}">${label}</div>`;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="screen" id="gameScreen">
+          <div class="progress">
+            <span>Вопрос ${idx+1} из ${total}</span>
+            <div class="dots">${Array.from({length: total}, (_,i) => `<span class="dot ${i===idx?'active':(i<idx?'done':'')}"></span>`).join('')}</div>
+          </div>
+          <div class="question-area">
+            <div class="stimulus ${isA ? '' : 'color-block'}" style="${isA ? '' : 'background:'+stimulus}">
+              ${isA ? stimulusLabel : ''}
+            </div>
+            <div class="options" id="optionsContainer">${optionsHtml}</div>
+            <div class="feedback" id="feedbackArea">Выберите вариант</div>
+          </div>
+        </div>
+      `;
+
+      document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          if (state.gameLocked) return;
+          const idx = parseInt(btn.dataset.index);
+          handleAnswerAorB(idx);
+        });
+      });
+    }
+
+    function handleAnswerAorB(selectedIdx) {
+      if (state.gameLocked) return;
+      state.gameLocked = true;
+      const qs = state.questions;
+      const idx = state.currentIndex;
+      const q = qs[idx];
+      const correct = q.correctAnswer;
+      const selectedColor = q.options[selectedIdx];
+      const isCorrect = selectedColor.name === correct;
+      const colorName = q.color.name;
+
+      updateStats(colorName, isCorrect);
+
+      const fb = document.getElementById('feedbackArea');
+      const options = document.querySelectorAll('.option-btn');
+      options.forEach((btn, i) => {
+        const opt = q.options[i];
+        if (opt.name === correct) btn.classList.add('correct');
+        if (i === selectedIdx && !isCorrect) btn.classList.add('wrong');
+        btn.classList.add('disabled');
+      });
+
+      fb.textContent = isCorrect ? '✅ Верно!' : `❌ Не совсем — это «${correct}»`;
+      fb.style.background = isCorrect ? '#d9f0e0' : '#f5d6d6';
+
+      state.answers.push({ selected: selectedColor.name, correct: isCorrect, skipped: false });
+
+      setTimeout(() => {
+        state.currentIndex++;
+        state.gameLocked = false;
+        if (state.currentIndex >= state.questions.length) {
+          finishCycle();
+        } else {
+          render();
+        }
+      }, 2200);
+    }
+
+    // ---- GAME C (drag & drop) ----
+    function renderGameC() {
+      const pairs = state.dragPairs;
+      const assign = state.dragAssign;
+      const allColors = pairs.map(p => p.color);
+      const assignedNames = Object.values(assign);
+      const freeColors = allColors.filter(c => !assignedNames.includes(c.name));
+
+      let dropZonesHtml = pairs.map(p => {
+        const assignedColorName = assign[p.targetName] || null;
+        const colorObj = assignedColorName ? getColorByName(assignedColorName) : null;
+        const filled = !!assignedColorName;
+        return `
+          <div class="drop-zone ${filled?'filled':''}" data-target="${p.targetName}">
+            ${filled ? `<span class="mini-color" style="background:${colorObj.hex};display:inline-block;"></span>` : ''}
+            ${p.targetName}
+          </div>
+        `;
+      }).join('');
+
+      let fishHtml = freeColors.map(c => `
+        <div class="drag-fish" draggable="true" data-color="${c.name}" style="background:${c.hex}; touch-action: none;"></div>
+      `).join('');
+
+      app.innerHTML = `
+        <div class="screen" id="gameScreenC">
+          <div class="progress"><span>Соотнеси 4 пары</span><span class="tag">${Object.keys(assign).length}/4</span></div>
+          <div class="drag-fish-wrapper">
+            ${fishHtml || '<span style="padding:10px;background:#e0d7c8;border-radius:40px;">Все цвета распределены</span>'}
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;">
+            ${dropZonesHtml}
+          </div>
+          <button class="btn-primary" id="checkDragBtn" ${Object.keys(assign).length < 4 ? 'disabled' : ''}>Проверить результат</button>
+          <div id="dragFeedback" style="text-align:center;font-size:1.1rem;color:#3b3226;">${Object.keys(assign).length < 4 ? 'Распределите все цвета' : 'Готово! Нажмите "Проверить результат"'}</div>
+        </div>
+      `;
+
+      // Drag & Drop
+      const fishElements = document.querySelectorAll('.drag-fish');
+      const dropZones = document.querySelectorAll('.drop-zone');
+
+      fishElements.forEach(fish => {
+        fish.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', fish.dataset.color);
+        });
+        fish.addEventListener('touchstart', (e) => {
+          const touch = e.touches[0];
+          window._dragColor = fish.dataset.color;
+        }, { passive: true });
+      });
+
+      document.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+      }, { passive: false });
+
+      dropZones.forEach(zone => {
+        zone.addEventListener('dragover', (e) => e.preventDefault());
+        zone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          const colorName = e.dataTransfer.getData('text/plain');
+          if (!colorName) return;
+          assignColorToZone(colorName, zone.dataset.target);
+        });
+        zone.addEventListener('touchend', (e) => {
+          const colorName = window._dragColor;
+          if (!colorName) return;
+          const rect = zone.getBoundingClientRect();
+          const touch = e.changedTouches[0];
+          if (touch.clientX >= rect.left && touch.clientX <= rect.right &&
+              touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+            assignColorToZone(colorName, zone.dataset.target);
+          }
+          window._dragColor = null;
+        });
+      });
+
+      document.getElementById('checkDragBtn').addEventListener('click', () => {
+        if (Object.keys(assign).length < 4) return;
+        let correctCount = 0;
+        for (const [target, colorName] of Object.entries(assign)) {
+          if (target === colorName) correctCount++;
+          updateStats(colorName, target === colorName);
+        }
+        state.dragFinished = true;
+        state.answers = pairs.map(p => {
+          const assigned = assign[p.targetName] || '';
+          return { selected: assigned, correct: assigned === p.targetName, skipped: false };
+        });
+        state._dragCorrectCount = correctCount;
+        finishCycle();
+      });
+    }
+
+    function assignColorToZone(colorName, targetName) {
+      const assign = state.dragAssign;
+      for (const [key, val] of Object.entries(assign)) {
+        if (val === colorName) delete assign[key];
+      }
+      assign[targetName] = colorName;
+      renderGameC();
+    }
+
+    // ---- FINISH CYCLE ----
+    function finishCycle() {
+      state.screen = 'resultCycle';
+      render();
+    }
+
+    // ---- RESULT CYCLE ----
+    function renderResultCycle() {
+      const mode = state.mode;
+      let title, items = [];
+      if (mode === 'C') {
+        const pairs = state.dragPairs;
+        const assign = state.dragAssign;
+        let correctCount = 0;
+        items = pairs.map(p => {
+          const assigned = assign[p.targetName] || '—';
+          const ok = assigned === p.targetName;
+          if (ok) correctCount++;
+          return { color: p.color, selected: assigned, correct: ok };
+        });
+        title = `Совпало пар: ${correctCount} из 4`;
+      } else {
+        const qs = state.questions;
+        const ans = state.answers;
+        let correctCount = ans.filter(a => a.correct).length;
+        title = `Правильных ответов: ${correctCount} из ${qs.length}`;
+        items = qs.map((q, i) => {
+          const a = ans[i] || { selected: '—', correct: false, skipped: false };
+          return { color: q.color, selected: a.selected || '—', correct: a.correct, skipped: a.skipped };
+        });
+      }
+
+      let rows = items.map(item => {
+        const icon = item.correct ? '✅' : (item.skipped ? '⏭️' : '❌');
+        return `
+          <div class="result-row">
+            <span class="color-sample" style="background:${item.color.hex};"></span>
+            <span class="result-name">${item.color.name}</span>
+            <span style="font-weight:500;font-size:0.95rem;">${item.selected}</span>
+            <span style="font-size:1.6rem;">${icon}</span>
+          </div>
+        `;
+      }).join('');
+
+      app.innerHTML = `
+        <div class="screen">
+          <h2 style="font-size:2rem;">${title}</h2>
+          <div class="result-grid">${rows}</div>
+          <button class="btn-primary" id="toStatsBtn">Далее →</button>
+        </div>
+      `;
+      document.getElementById('toStatsBtn').addEventListener('click', () => {
+        state.screen = 'stats';
+        render();
+      });
+    }
+
+    // ---- STATS ----
+    function renderStats() {
+      const stats = state.stats;
+      const entries = Object.entries(stats);
+      let rows = '';
+      if (entries.length === 0) {
+        rows = '<div class="empty-state">Нет данных за сессию</div>';
+      } else {
+        const order = COLOR_DATA.map(c => c.name);
+        entries.sort((a,b) => order.indexOf(a[0]) - order.indexOf(b[0]));
+        rows = entries.map(([name, data]) => {
+          const color = getColorByName(name);
+          return `
+            <div class="stat-row">
+              <span class="color-badge" style="background:${color ? color.hex : '#ccc'};"></span>
+              <span style="flex:1;font-weight:500;font-size:0.95rem;">${name}</span>
+              <span class="stat-numbers">✅ ${data.correct || 0}  ❌ ${data.wrong || 0}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      app.innerHTML = `
+        <div class="screen">
+          <h2 style="font-size:2rem;">Общая статистика</h2>
+          <div class="stat-grid">${rows}</div>
+          <button class="btn-primary" id="playAgainBtn">🎮 Играть снова</button>
+          <div style="font-size:0.9rem;color:#5e5140;text-align:center;margin-top:4px;">сессия сохраняется · отойдите для сброса</div>
+        </div>
+      `;
+      document.getElementById('playAgainBtn').addEventListener('click', () => {
+        state.screen = 'modeSelect';
+        render();
+      });
+
+      clearTimeout(state.sessionTimer);
+      state.sessionTimer = setTimeout(() => {
+        state.screen = 'attract';
+        state.stats = {};
+        render();
+      }, 45000);
+    }
+
+    // ---- СТАРТ ----
+    render();
+  })();
+</script>
+</body>
+</html>
